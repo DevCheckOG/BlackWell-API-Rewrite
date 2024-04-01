@@ -1,5 +1,5 @@
 <p align="center">
-  <img src= "https://github.com/DevCheckOG/BlackWell-API/blob/master/assets/BlackWell-light.png" alt= "logo" style= "width: 400px; height: 400px;"> </img>
+  <img src= "https://github.com/DevCheckOG/BlackWell-API-Rewrite/blob/main/assets/logo.png" alt= "logo" style= "width: 400px; height: 400px;"> </img>
 </p>
 
 # 🚝 BlackWell API Rewrite - Development repository (Rust 🦀 implementation)
