@@ -2,7 +2,7 @@
   <img src= "https://github.com/DevCheckOG/BlackWell-API/blob/master/assets/BlackWell-light.png" alt= "logo" style= "width: 400px; height: 400px;"> </img>
 </p>
 
-# 📨 BlackWell API Rewrite - Development repository
+# ⚡BlackWell API Rewrite - Development repository
 
 # 🧾 Tech Stack
 
