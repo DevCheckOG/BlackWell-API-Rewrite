@@ -2,7 +2,11 @@
   <img src= "https://github.com/DevCheckOG/BlackWell-API/blob/master/assets/BlackWell-light.png" alt= "logo" style= "width: 400px; height: 400px;"> </img>
 </p>
 
-# ⚡BlackWell API Rewrite - Development repository
+# ⚡BlackWell API Rewrite - Development repository (Rust 🦀 implementation)
+
+## 🎯 ¿What is BlackWell API?
+
+- 🌐 **Represents the internal infrastructure of BlackWell, which is an instant messaging application.**
 
 # 🧾 Tech Stack
 
@@ -31,11 +35,7 @@
 
 > [!WARNING]  
 > **El código se encuentra en fase de desarrollo por lo tanto puede contar con problemas de rendimiento o bugs.**
+  
+## 🌟 Developers
 
-## 🎯 ¿Qué es BlackWell API?
-
-- 🌐 **Representa la infraestructura interna de BlackWell, que es una aplicación de mensajería instantánea.**
-
-## 💻 Developers
-
-**DevCheckOG:** https://github.com/DevCheckOG/
+- **DevCheckOG:** https://github.com/DevCheckOG/ | https://paypal.me/DevCheck
