@@ -7,7 +7,7 @@
 ## ⚠️ Advertencias
 
 > [!WARNING]  
-> **El código se encuentra en constante desarrollo. Puede contener errores.**
+> **El código se encuentra en fase de desarrollo por lo tanto puede contar con problemas de rendimiento o bugs.**
 
 ## 🎯 ¿Qué es BlackWell API?
 
