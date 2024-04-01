@@ -6,9 +6,9 @@
 
 # 🧾 Tech Stack
 
-<p align="start">
-  <img src= "https://github.com/DevCheckOG/BlackWell-API-Rewrite/blob/main/assets/rocket-rs.png" alt= "logo" style= "width: 200px; height: 200px;"> </img>
-</p>
+## Rocket.rs
+
+**A web framework for Rust gear Rust that makes it simple to write fast, type-safe, secure web applications with incredible usability, productivity and performance.** 
 
 > https://rocket.rs/
 
