@@ -7,7 +7,7 @@
 # 🧾 Tech Stack
 
 <p align="start">
-  <img src= "https://github.com/DevCheckOG/BlackWell-API-Rewrite/assets/126353237/df44d2db-e1dd-449e-a453-0363020b731b" alt= "logo" style= "width: 200px; height: 200px;"> </img>
+  <img src= "https://github.com/DevCheckOG/BlackWell-API-Rewrite/tree/main/assets/rocket-rs.png" alt= "logo" style= "width: 200px; height: 200px;"> </img>
 </p>
 
 > https://rocket.rs/
