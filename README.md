@@ -7,7 +7,7 @@
 # 🧾 Tech Stack
 
 > [!TIP]
-> **Next you can see a best options for develop your web app in Rust.**
+> **Next you can see a best options for develop your web api in Rust or Python.**
 
 ## Rocket.rs 🚀
 
