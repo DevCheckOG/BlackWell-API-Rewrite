@@ -4,7 +4,7 @@
 
 # 🚝 BlackWell API Rewrite - Development repository (Rust 🦀 implementation)
 
-## 🎯 ¿What is BlackWell API?
+## 🧩 ¿What is BlackWell API?
 
 - 🌐 **Represents the internal infrastructure of BlackWell, which is an instant messaging application.**
 
