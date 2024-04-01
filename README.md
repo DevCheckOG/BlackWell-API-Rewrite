@@ -34,7 +34,7 @@
 ## ⚠️ Warnings
 
 > [!WARNING]  
-> **El código se encuentra en fase de desarrollo por lo tanto puede contar con problemas de rendimiento o bugs.**
+> **The code is in the development phase therefore it may have performance problems or bugs.**
   
 ## 🌟 Developers
 
