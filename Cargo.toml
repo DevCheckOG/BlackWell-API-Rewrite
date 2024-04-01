@@ -1,0 +1,85 @@
+[package]
+
+name = "blackwell_api"
+description = "BlackWell API representa la infraestructura de su misma aplicación de mensajería."
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+# MongoDB
+# Driver: https://crates.io/crates/mongodb
+# Docs: https://www.mongodb.com/docs/drivers/rust/current/
+mongodb = "2.8.2"
+
+# JSON Serialization
+# Crate: https://crates.io/crates/serde
+# Github: https://github.com/serde-rs/serde
+# Docs: https://serde.rs/
+serde = { version = "1.0.197", features = ["derive"] }
+
+# Colored
+# Crate: https://crates.io/crates/colored
+# Github: https://github.com/colored-rs/colored
+# Docs: https://docs.rs/colored/2.1.0/colored/
+colored = "2.1.0"
+
+# Chrono
+# Crate: https://crates.io/crates/chrono
+# Github: https://github.com/chronotope/chrono
+# Docs: https://docs.rs/chrono/0.4.37/chrono/
+chrono = "0.4.37"
+
+# Tokio
+# Crate: https://crates.io/crates/tokio
+# Github: https://github.com/tokio-rs/tokio 
+# Docs: https://docs.rs/tokio/latest/tokio/
+tokio = { version = "1.36.0", features = ["full"] }
+
+# Dotenv
+# Crate: https://crates.io/crates/dotenv
+# Github: https://github.com/dotenv-rs/dotenv
+# Docs: https://docs.rs/dotenv/latest/dotenv/
+dotenv = "0.15.0"	
+
+# Futures
+# Crate: https://crates.io/crates/futures
+# Github: https://rust-lang.github.io/futures-rs/
+# Docs: https://docs.rs/futures/latest/futures/
+futures = "0.3.30"
+
+# Uuid
+# Crate: https://crates.io/crates/uuid
+# Github: https://github.com/uuid-rs/uuid
+# Docs: https://docs.rs/uuid/latest/uuid/
+uuid = "1.8.0"
+
+# Rand
+# Crate: https://crates.io/crates/rand
+# Github: https://github.com/rust-random/rand
+# Docs: https://docs.rs/rand/latest/rand/
+rand = "0.8.5"
+
+# Lettre
+# Crate: https://crates.io/crates/lettre
+# Github: https://github.com/lettre/lettre
+# Docs: https://docs.rs/lettre/latest/lettre/
+lettre = "0.11.6"
+
+# Rocket
+# Crate: https://crates.io/crates/rocket
+# Github: https://github.com/SergioBenitez/Rocket
+# Docs: https://docs.rs/rocket/latest/rocket/
+rocket = { version = "0.5.0", features = ["json"] }
+
+# Regex
+# Crate: https://crates.io/crates/regex
+# Github: https://github.com/rust-lang/regex
+# Docs: https://docs.rs/regex/latest/regex/
+regex = "1.10.4"
+
+# Rocket-Governor
+# Crate: https://crates.io/crates/rocket-governor
+# Github: https://github.com/rocket-rs/rocket-governor
+# Docs: https://docs.rs/rocket-governor/latest/rocket_governor/
+rocket-governor = {git = "https://github.com/kolbma/rocket-governor", features = ["limit_info"] }
