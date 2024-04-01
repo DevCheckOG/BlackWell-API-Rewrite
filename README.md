@@ -12,7 +12,7 @@
 
 > https://rocket.rs/
 
-## ⚠️ Advertencias
+## ⚠️ Warnings
 
 > [!WARNING]  
 > **El código se encuentra en fase de desarrollo por lo tanto puede contar con problemas de rendimiento o bugs.**
@@ -21,6 +21,6 @@
 
 - 🌐 **Representa la infraestructura interna de BlackWell, que es una aplicación de mensajería instantánea.**
 
-## 💻 Desarrolladores
+## 💻 Developers
 
 **DevCheckOG:** https://github.com/DevCheckOG/
