@@ -14,6 +14,12 @@
 
 > https://rocket.rs/
 
+## MongoDB
+
+MongoDB is a document database that offers great scalability and flexibility, and an advanced indexing and query model.
+
+> https://www.mongodb.com/docs/drivers/rust/current/
+
 ## ⚠️ Warnings
 
 > [!WARNING]  
