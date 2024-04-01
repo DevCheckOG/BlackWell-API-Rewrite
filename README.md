@@ -21,6 +21,12 @@
 
 > https://www.mongodb.com/docs/drivers/rust/current/
 
+# Fast API ⚡
+
+**FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.8+ based on standard Python type hints.**
+
+> https://fastapi.tiangolo.com/
+
 ## ⚠️ Warnings
 
 > [!WARNING]  
