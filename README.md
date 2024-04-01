@@ -6,8 +6,6 @@
 
 # 🧾 Tech Stack
 
-<a href="https://github.com/DevCheckOG/BlackWell-API-Rewrite/"><img alt="MongoDB" src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white"></a>
-
 ## Rocket.rs 🚀
 
 **A web framework for Rust gear Rust that makes it simple to write fast, type-safe, secure web applications with incredible usability, productivity and performance.** 
