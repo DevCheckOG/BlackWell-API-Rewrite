@@ -6,7 +6,7 @@
 
 # 🧾 Tech Stack
 
-## Rocket.rs
+## Rocket.rs 🚀
 
 **A web framework for Rust gear Rust that makes it simple to write fast, type-safe, secure web applications with incredible usability, productivity and performance.** 
 
