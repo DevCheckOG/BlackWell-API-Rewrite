@@ -1,9 +1,8 @@
-/* BlackWell API Rust Rewrite */
+/* BlackWell API Rust 🦀 Implementation */
 
 #[macro_use]
 extern crate rocket;
 
-use dotenv;
 use rocket::{routes, Config, Ignite, Rocket};
 
 mod core;

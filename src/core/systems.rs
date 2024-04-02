@@ -283,7 +283,7 @@ pub async fn get_profile_account<'a>(token: &'a str, contact: &'a str) -> Profil
 async fn gen_random_six_number() -> String {
     let mut rng: rand::rngs::ThreadRng = rand::thread_rng();
     let nums: (i32, i32) = (rng.gen_range(1000..=9999), rng.gen_range(1000..=9999));
-    return nums.0.to_string() + &nums.1.to_string();
+    nums.0.to_string() + &nums.1.to_string()
 }
 
 async fn is_hex(string: &str) -> bool {

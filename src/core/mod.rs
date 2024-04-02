@@ -28,7 +28,7 @@ use self::ratelimiter::*;
 /* Endpoints */
 
 #[get("/")]
-pub async fn index<'a>(_rate_limiter: RocketGovernor<'a, IndexRateLimiter>) -> Json<Index<'a>> {
+pub async fn index(_rate_limiter: RocketGovernor<'_, IndexRateLimiter>) -> Json<Index<'_>> {
     Json(Index {
         title: "BlackWell API Revamped",
         author: Author {
@@ -46,7 +46,7 @@ pub async fn register_acc<'a>(
     data: Json<Register<'a>>,
 ) -> Json<DefaultResponse<'a>> {
     let result: DefaultResponse<'_> =
-        register_account(&data.username, &data.email, &data.password).await;
+        register_account(data.username, data.email, data.password).await;
 
     Json(result)
 }
@@ -56,7 +56,7 @@ pub async fn verify_acc<'a>(
     _rate_limiter: RocketGovernor<'a, VerifyRateLimiter>,
     data: Json<VerificationCode<'a>>,
 ) -> Json<DefaultResponse<'a>> {
-    let result: DefaultResponse<'_> = verify_account(&data.code).await;
+    let result: DefaultResponse<'_> = verify_account(data.code).await;
 
     Json(result)
 }
@@ -66,7 +66,7 @@ pub async fn unregister_acc<'a>(
     _rate_limiter: RocketGovernor<'a, UnregisterRateLimiter>,
     data: Json<DeleteAccount<'a>>,
 ) -> Json<DefaultResponse<'a>> {
-    let result: DefaultResponse<'_> = delete_account(&data.email, &data.password).await;
+    let result: DefaultResponse<'_> = delete_account(data.email, data.password).await;
 
     Json(result)
 }
@@ -76,7 +76,7 @@ pub async fn login_acc<'a>(
     _rate_limiter: RocketGovernor<'a, LoginRateLimiter>,
     data: Json<Login<'a>>,
 ) -> Json<AccountResponse<'a>> {
-    let result: AccountResponse<'_> = login_account(&data.email, &data.password).await;
+    let result: AccountResponse<'_> = login_account(data.email, data.password).await;
 
     Json(result)
 }
@@ -86,7 +86,7 @@ pub async fn set_profile_acc<'a>(
     _generic_rate_limiter: RocketGovernor<'a, GenericRateLimiter>,
     data: Json<SetProfile<'a>>,
 ) -> Json<DefaultResponse<'a>> {
-    let result: DefaultResponse<'_> = set_profile_account(&data.token, &data.profile).await;
+    let result: DefaultResponse<'_> = set_profile_account(data.token, data.profile).await;
 
     Json(result)
 }
@@ -96,7 +96,7 @@ pub async fn get_profile_acc<'a>(
     _generic_rate_limiter: RocketGovernor<'a, GenericRateLimiter>,
     data: Json<GetProfile<'a>>,
 ) -> Json<ProfileResponse<'a>> {
-    let result: ProfileResponse<'_> = get_profile_account(&data.token, &data.contact).await;
+    let result: ProfileResponse<'_> = get_profile_account(data.token, data.contact).await;
 
     Json(result)
 }
@@ -119,10 +119,10 @@ pub async fn action<'a>(
         });
     }
 
-    if let Some(_acc) = fetch_account(data.email, data.password).await {
+    if (fetch_account(data.email, data.password).await).is_some() {
         match data.action {
             "add" => {
-                if !data.add.is_none() {
+                if data.add.is_some() {
                     let response: bool = add_action_message(
                         data.add.clone().unwrap().to,
                         data.add.clone().unwrap().action,
@@ -149,7 +149,7 @@ pub async fn action<'a>(
                 });
             }
             "get" => {
-                if !data.get.is_none() {
+                if data.get.is_some() {
                     if let Some(actions) = get_action_message(data.get.as_ref().unwrap().to).await {
                         return Json(ActionResponse {
                             title: "BlackWell API Revamped",
@@ -181,7 +181,7 @@ pub async fn action<'a>(
                 });
             }
             "delete" => {
-                if !data.delete.is_none() {
+                if data.delete.is_some() {
                     let response: bool =
                         delete_action_message(data.delete.clone().unwrap().to).await;
 
@@ -246,10 +246,10 @@ pub async fn queue<'a>(
         });
     }
 
-    if let Some(_acc) = fetch_account(data.email, data.password).await {
+    if (fetch_account(data.email, data.password).await).is_some() {
         match data.action {
             "add" => {
-                if !data.add.is_none() {
+                if data.add.is_some() {
                     let response: bool = add_message_queue_history(
                         data.add.clone().unwrap().to,
                         data.add.clone().unwrap().message,
@@ -276,7 +276,7 @@ pub async fn queue<'a>(
                 });
             }
             "get" => {
-                if !data.get.is_none() {
+                if data.get.is_some() {
                     if let Some(actions) = get_queue_history(data.get.as_ref().unwrap().token).await
                     {
                         return Json(QueueResponse {
@@ -309,7 +309,7 @@ pub async fn queue<'a>(
                 });
             }
             "delete" => {
-                if !data.delete.is_none() {
+                if data.delete.is_some() {
                     let response: bool =
                         delete_queue_history(data.delete.clone().unwrap().to).await;
 
@@ -377,7 +377,7 @@ pub async fn contact<'a>(
     if let Some(_acc) = fetch_account(data.email, data.password).await {
         match data.action {
             "add" => {
-                if !data.add.is_none() {
+                if data.add.is_some() {
                     let response: bool = contact_add_or_remove(
                         data.add.as_ref().unwrap().action,
                         data.add.as_ref().unwrap().from,
@@ -394,6 +394,15 @@ pub async fn contact<'a>(
                         date: Local::now().format("%Y-%m-%d %H:%M:%S").to_string(),
                     });
                 }
+
+                return Json(ContactResponse {
+                    title: "BlackWell API Revamped",
+                    message: "The optional add paramenter is not valid.",
+                    success: false,
+                    request: None,
+                    response: None,
+                    date: Local::now().format("%Y-%m-%d %H:%M:%S").to_string(),
+                });
             }
 
             _ => {

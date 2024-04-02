@@ -74,11 +74,9 @@ pub async fn fetch_account(email: &str, password: &str) -> Option<String> {
         .await
         .unwrap_or(None);
 
-    if !result.is_none() {
-        return Some(result.unwrap().id);
-    }
+    result.as_ref()?;
 
-    None
+    Some(result.unwrap().username)
 }
 
 pub async fn get_account_with_email_and_password(email: &str, password: &str) -> Option<Account> {
@@ -108,13 +106,11 @@ pub async fn delete_acc(email: &str, password: &str) -> bool {
 pub async fn get_token_with_email_and_password(email: &str, password: &str) -> Option<Vec<String>> {
     let db: &DB = unsafe { MAIN_DB.as_ref().unwrap() };
     let collection: Collection<Account> = db.users.collection("permanent");
-    if let Ok(rs) = collection
+    if let Ok(Some(rs)) = collection
         .find_one(doc! { "email": email, "password": password }, None)
         .await
     {
-        if let Some(user) = rs {
-            return Some(vec![user.clone().id, user.clone().username]);
-        }
+        return Some(vec![rs.clone().id, rs.clone().username]);
     }
 
     None
@@ -123,13 +119,11 @@ pub async fn get_token_with_email_and_password(email: &str, password: &str) -> O
 pub async fn get_token_with_username(username: &str) -> Option<Vec<String>> {
     let db: &DB = unsafe { MAIN_DB.as_ref().unwrap() };
     let collection: Collection<Account> = db.users.collection("permanent");
-    if let Ok(rs) = collection
+    if let Ok(Some(rs)) = collection
         .find_one(doc! { "username": username }, None)
         .await
     {
-        if let Some(user) = rs {
-            return Some(vec![user.clone().id, user.clone().username]);
-        }
+        return Some(vec![rs.clone().id, rs.clone().username]);
     }
 
     None
@@ -157,13 +151,11 @@ pub async fn get_account_profile(contact: &str) -> Option<String> {
     let collection: Collection<Account> = db.users.collection("permanent");
 
     if let Some(tk) = get_token_with_username(contact).await {
-        if let Ok(rs) = collection
+        if let Ok(Some(rs)) = collection
             .find_one(doc! { "_id": tk[0].as_str() }, None)
             .await
         {
-            if let Some(user) = rs {
-                return Some(user.profile);
-            }
+            return Some(rs.profile);
         }
     }
 
@@ -173,10 +165,8 @@ pub async fn get_account_profile(contact: &str) -> Option<String> {
 pub async fn check_if_account_in_contacts(id: &str, contact: &str) -> bool {
     let db: &DB = unsafe { MAIN_DB.as_ref().unwrap() };
     let collection: Collection<Account> = db.users.collection("permanent");
-    if let Ok(rs) = collection.find_one(doc! { "_id": id}, None).await {
-        if let Some(user) = rs {
-            return user.contacts.contains(&contact.to_string());
-        }
+    if let Ok(Some(rs)) = collection.find_one(doc! { "_id": id}, None).await {
+        return rs.contacts.contains(&contact.to_string());
     }
 
     false
@@ -187,7 +177,7 @@ pub async fn contact_add_or_remove(action: &str, from: &str, to: &str) -> bool {
     let collection: Collection<Account> = db.users.collection("permanent");
 
     if let Some(tk) = get_token_with_username(to).await {
-        if check_if_account_in_contacts(&tk[0], from).await != true && action == "add" {
+        if check_if_account_in_contacts(&tk[0], from).await == true && action == "add" {
             let result: UpdateResult = collection
                 .update_one(
                     doc! { "username": to},
@@ -198,7 +188,7 @@ pub async fn contact_add_or_remove(action: &str, from: &str, to: &str) -> bool {
                 .unwrap();
 
             return result.modified_count > 0;
-        } else if check_if_account_in_contacts(&tk[0], from).await != false && action == "remove" {
+        } else if check_if_account_in_contacts(&tk[0], from).await == false && action == "remove" {
             let result: UpdateResult = collection
                 .update_one(
                     doc! { "username": to},
@@ -238,10 +228,8 @@ pub async fn get_action_message(username: &str) -> Option<Vec<ActionMessage>> {
     let collection: Collection<ActionBase> = db.messages.collection("actions");
 
     if let Some(tk) = get_token_with_username(username).await {
-        if let Ok(rs) = collection.find_one(doc! { "_id": &tk[0]}, None).await {
-            if let Some(action) = rs {
-                return Some(action.actions);
-            }
+        if let Ok(Some(rs)) = collection.find_one(doc! { "_id": &tk[0]}, None).await {
+            return Some(rs.actions);
         }
     }
 
@@ -339,13 +327,11 @@ pub async fn is_valid_verification_code(verification_code: &str) -> bool {
     let db: &DB = unsafe { MAIN_DB.as_ref().unwrap() };
     let collection: Collection<TemporalAccount> = db.users.collection("temporal");
 
-    if let Ok(rs) = collection
+    if let Ok(Some(rs)) = collection
         .find_one(doc! {"verification.code": verification_code}, None)
         .await
     {
-        if let Some(tmp_usr) = rs {
-            return tmp_usr.verification.code == verification_code;
-        }
+        return rs.verification.code == verification_code;
     }
     false
 }
@@ -354,14 +340,12 @@ pub async fn get_temp_account(verification_code: &str) -> Option<TemporalAccount
     let db: &DB = unsafe { MAIN_DB.as_ref().unwrap() };
     let collection: Collection<TemporalAccount> = db.users.collection("temporal");
 
-    if let Ok(rs) = collection
+    if let Ok(Some(rs)) = collection
         .find_one(doc! {"verification.code": verification_code}, None)
         .await
     {
-        if let Some(tmp_usr) = rs {
-            if tmp_usr.verification.code == verification_code {
-                return Some(tmp_usr);
-            }
+        if rs.verification.code == verification_code {
+            return Some(rs);
         }
     }
 
@@ -372,10 +356,8 @@ pub async fn get_queue_history(token: &str) -> Option<Vec<Message>> {
     let db: &DB = unsafe { MAIN_DB.as_ref().unwrap() };
     let collection: Collection<MessageBase> = db.messages.collection("queue");
 
-    if let Ok(rs) = collection.find_one(doc! {"_id": token}, None).await {
-        if let Some(msg) = rs {
-            return Some(msg.messages);
-        }
+    if let Ok(Some(rs)) = collection.find_one(doc! {"_id": token}, None).await {
+        return Some(rs.messages);
     }
 
     None
@@ -478,7 +460,7 @@ pub async fn clear_temporal_accounts() {
                 }
             }
 
-            let _ = sleep(Duration::from_secs(60));
+            sleep(Duration::from_secs(60)).await;
         }
     }
 
@@ -490,7 +472,7 @@ pub async fn clear_queue_messages() {
         let collection: Collection<TemporalAccount> = db.database("messages").collection("queue");
 
         loop {
-            let _ = sleep(Duration::from_secs(60 * 60 * 25));
+            sleep(Duration::from_secs(60 * 60 * 25)).await;
 
             if collection.count_documents(doc! {}, None).await.unwrap() == 0 {
                 continue;
