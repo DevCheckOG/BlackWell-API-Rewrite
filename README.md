@@ -2,7 +2,7 @@
   <img src= "https://github.com/DevCheckOG/BlackWell-API-Rewrite/blob/master/assets/logo.png" alt= "logo" style= "width: 400px; height: 400px;"> </img>
 </p>
 
-# 🚝 BlackWell API Rewrite - Development repository (Rust 🦀 implementation)
+# 🚄 BlackWell API Rewrite - Development repository (Rust 🦀 implementation)
 
 ## 🧩 ¿What is BlackWell API?
 
